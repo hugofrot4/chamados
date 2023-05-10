@@ -37,10 +37,10 @@ export default function SignUp() {
             onChange={(e) => setPassword(e.target.value)}
           />
 
-          <button type="submit">Acessar</button>
+          <button type="submit">Cadastrar</button>
         </form>
 
-        <Link to="/register">Já possui uma conta? Faça login</Link>
+        <Link to="/">Já possui uma conta? Faça login</Link>
       </div>
     </div>
   );
