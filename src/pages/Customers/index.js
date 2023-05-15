@@ -19,7 +19,7 @@ export default function Customers() {
 
     if (nome !== '' && cnpj !== '' && endereco !== '') {
       await addDoc(collection(db, 'customers'), {
-        nomeFantaasia: nome,
+        nomeFantasia: nome,
         cnpj: cnpj,
         endereco: endereco,
       })
