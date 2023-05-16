@@ -17,6 +17,7 @@ import {
 import { db } from '../../services/firebaseConnection';
 
 import { format } from 'date-fns';
+import Modal from '../../components/Modal';
 
 import './dashboard.css';
 
@@ -31,6 +32,9 @@ export default function Dashboard() {
   const [isEmpty, setIsEmpty] = useState(false);
   const [lastDocs, setLastDocs] = useState();
   const [loadingMore, setLoadingMore] = useState(false);
+
+  const [showPostModal, setShowPostModal] = useState(false);
+  const [detail, setDetail] = useState();
 
   useEffect(() => {
     async function loadChamados() {
@@ -90,6 +94,11 @@ export default function Dashboard() {
     );
     const querySnapshot = await getDocs(q);
     await upadateState(querySnapshot);
+  }
+
+  function toggleModal(item) {
+    setShowPostModal(!showPostModal);
+    setDetail(item);
   }
 
   if (loading) {
@@ -167,6 +176,7 @@ export default function Dashboard() {
                           <button
                             className="action"
                             style={{ backgroundColor: '#3583f6' }}
+                            onClick={() => toggleModal(item)}
                           >
                             <FiSearch color="#fff" size={17} />
                           </button>
@@ -194,6 +204,13 @@ export default function Dashboard() {
           )}
         </>
       </div>
+
+      {showPostModal && (
+        <Modal
+          conteudo={detail}
+          close={() => setShowPostModal(!showPostModal)}
+        />
+      )}
     </div>
   );
 }
